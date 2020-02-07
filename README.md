@@ -1,6 +1,8 @@
 # DirectoryServices-AD
 
-This script helps users update the Greetly Directory using a LDAP or Active Directory.
+We developed a PowerShell script that allows you to send Greetly your Active Directory users via HTTPS. You can schedule this script to run as a job on your environment. All you have to do is update the variables in the script with your AD and Greetly information.
+
+# NOTE
 
 For non-servers this requires Remote Server Administration Tools for Windows. The required PowerShell plug-in can be downloaded from the following URLs:
 
