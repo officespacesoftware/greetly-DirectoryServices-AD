@@ -11,12 +11,19 @@
 # SearchBase: The OU in AD where users will be retrived from
 # ADServer: The name of AD server queries will be performed against
 # 
+# If you have less than 250 users and want immediate feedback on the users created please the following URL
+# $encondedUrl = "https://app.greetly.com/api/directory_services?location_name=$encondedParam"
+#
+# However if you have more than 250 users you should use the following to run the import asynchronously
+# $encondedUrl = "https://app.greetly.com/api/directory_services?delayed=true&location_name=$encondedParam"
+#
 $username = "domain\username"
 $password = "password"
 $APIKey="your_greetly_api_key_goes_here"
 $SearchBase = "CN=Users,DC=your_domain,DC=local"
 $ADServer = 'YOUR_SERVER_NAME'
 $locationName = "name_of_location_to_be_updated"
+#
 #
 ###########################################################
 #
