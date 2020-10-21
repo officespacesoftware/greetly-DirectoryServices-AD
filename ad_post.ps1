@@ -1,3 +1,17 @@
+[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor [System.Net.SecurityProtocolType]::Tls12
+Add-Type -TypeDefinition @'
+using System.Net;
+using System.Security.Cryptography.X509Certificates;
+public class TrustAllCertsPolicy : ICertificatePolicy
+{
+    public bool CheckValidationResult(ServicePoint sp, X509Certificate cert, WebRequest req, int certProblem)
+    {
+        return true;
+    }
+}
+'@
+[System.Net.ServicePointManager]::CertificatePolicy = New-Object -TypeName TrustAllCertsPolicy
+
 ###########################################################
 # COMMENT : This script updates the Greetly Directory using a LDAP or Active Directory.
 #           The script queries users information from AD and sends them to Greetly via HTTP POST.
@@ -48,7 +62,7 @@ $httpBody =  $ADUsers | Select-Object @{Label = "email";Expression = {$_.Mail}},
 #@{Label = "company";Expression = {$_.Company}},
 #@{Label = "company";Expression = {$_.Department}},
 @{Label = "sms_phone";Expression = {$countryCode + $_.mobile}},
-@{Label = "voice_phone";Expression = {$countryCode + $_.telephoneNumber}} | ConvertTo-Csv -NoTypeInformation -Encoding Unicode
+@{Label = "voice_phone";Expression = {$countryCode + $_.telephoneNumber}} | ConvertTo-Csv -NoTypeInformation
            
 # These fields are not in AD, but could be stored as custom attributes
 #@{Label = "voice_extension";Expression = {$_.customAttribute1}},
