@@ -1,4 +1,5 @@
 [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor [System.Net.SecurityProtocolType]::Tls12
+Add-Type -AssemblyName System.Web
 Add-Type -TypeDefinition @'
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
