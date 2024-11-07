@@ -9,9 +9,8 @@ $SearchScope = "OneLevel"
 $ADServer = "domain.local"
 $locationName = "Example"
 $loactionId = "2"
-$asyncParam = "true"
 $countryCode = "+1"
-$method = "POST" # or "PUT" or "PATCH" or "DELETE"
+$method = "POST" # or "DELETE"
 $hostUrl = "http://localhost:5001" # or "https://greetly-qa.herokuapp.com"
 
 $securePassword = ConvertTo-SecureString $password -AsPlainText -Force
@@ -66,6 +65,6 @@ $httpBody = $httpBody -join "`n"
 
 $headers = @{"api-key"=$APIKey;"Content-Type"="text/csv"}
 $encondedParam = [System.Web.HttpUtility]::UrlEncode($locationName)
-$encondedUrl = "$($hostUrl)/api/directory_services?delayed=$($asyncParam)&location_name=$($encondedParam)&location_id=$($loactionId)&exact_sync=true"
+$encondedUrl = "$($hostUrl)/api/directory_services?location_name=$($encondedParam)&location_id=$($loactionId)&exact_sync=true"
 
 Invoke-WebRequest -Uri $encondedUrl -Method $method -Body $httpBody -Headers $headers
